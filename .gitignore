@@ -1,0 +1,7 @@
+# Idea
+.idea/
+
+# Vagrant
+vagrant_rsa
+.vagrant/
+data/
