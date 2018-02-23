@@ -36,3 +36,16 @@ Prepare docker image
 cd pyapp1
 docker build -t mru/pyapp1:1 .
 ```
+
+Run:
+
+```
+kubectl run pyapp1 --image mru/pyapp1:2 --port=8080
+kubectl expose deployment pyapp1 --type=NodePort
+```
+
+Autoscale
+
+```
+kubectl autoscale deployment pyapp1 --cpu-percent=10 --min=1 --max=10
+```
