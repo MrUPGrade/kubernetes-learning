@@ -1,51 +1,27 @@
 # Kubernetes learning
 
-Installation
+## Installation
 
+kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
-KubeCTL
-
-https://kubernetes.io/docs/tasks/tools/install-kubectl/
-
-Kube
-
-https://github.com/kubernetes/minikube/releases
-
-
+minikube: https://github.com/kubernetes/minikube/releases
 
 # Start
 
+Start:
 
 ```
 minikube start --vm-driver=virtualbox
 ```
 
-Run local docker on kubenernetes host:
+or
+
+```
+minikube start --vm-driver=virtualbox --cpus 4 --disk-size 40g --memory 4096
+```
+
+Docker:
 
 ```
 eval $(minikube docker-env)
-```
-
-
-
-# Example app in docker
-
-Prepare docker image
-
-```
-cd pyapp1
-docker build -t mru/pyapp1:1 .
-```
-
-Run:
-
-```
-kubectl run pyapp1 --image mru/pyapp1:2 --port=8080
-kubectl expose deployment pyapp1 --type=NodePort
-```
-
-Autoscale
-
-```
-kubectl autoscale deployment pyapp1 --cpu-percent=10 --min=1 --max=10
 ```
