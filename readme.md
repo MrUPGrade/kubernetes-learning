@@ -1,5 +1,7 @@
 # Kubernetes learning
 
+Project for learning Kubernetes and storing notes.
+
 ## Installation
 
 kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
