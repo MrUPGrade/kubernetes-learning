@@ -1,12 +1,12 @@
 apiVersion: "v1"
 kind: "PersistentVolume"
 metadata:
-  name: pv-1
+  name: kta-log-v
 spec:
   capacity:
-    storage: "1Gi"
+    storage: 1Gi
   accessModes:
-    - "ReadWriteOnce"
+    - ReadWriteMany
   hostPath:
     # directory location on host
     path: /data/pv-1

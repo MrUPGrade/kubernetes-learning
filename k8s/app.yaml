@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: kta-deployment
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -23,11 +23,11 @@ spec:
               value: /log/
           volumeMounts:
             - mountPath: /log/
-              name: data-storage
+              name: log
       volumes:
-        - name: data-storage
+        - name: log
           persistentVolumeClaim:
-            claimName: "pvc-1"
+            claimName: "kta-log-vc"
 
 ---
 apiVersion: v1
