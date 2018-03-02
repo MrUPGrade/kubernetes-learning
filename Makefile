@@ -1,10 +1,16 @@
 WORKSPACE:=$(shell pwd)
 
-D=docker
-
-TAG=1
-
+TAG=4
 KTA_IMAGE_NAME=mrupgrade/kta:$(TAG)
+
+D=docker
+RM=rm -Rfv
+DE=eval $(minikube docker-env);
+
+
+clean:
+	$(RM) *.log
+
 
 debug:
 	@echo workspace: $(WORKSPACE)
@@ -14,13 +20,14 @@ docker-kta-build:
 	$(D) build -t $(KTA_IMAGE_NAME) $(WORKSPACE)/kta/
 
 docker-kta-push:
-	@echo test
+	$(D) push $(KTA_IMAGE_NAME)
 
 
-k8s-kta-run:
+
+
+k8s-endpoints:
+	minikube service list
+
+k8s-kta-pod-run:
 	kubectl run kta --image $(KTA_IMAGE_NAME) --port=8080
 	kubectl expose deployment kta --type=LoadBalancer
-	#--type=NodePort
-
-k8x-kta-delete:
-	kubectl

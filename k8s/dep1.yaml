@@ -1,0 +1,49 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kta-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kta
+        cmp: app
+    spec:
+      containers:
+        - name: kta-app
+          image: mrupgrade/kta:4
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KTA_DEBUG_VAR
+              value: Value from deployment definition
+            - name: KTA_LOG_PATH
+              value: /log/
+          volumeMounts:
+            - mountPath: /log/
+              name: data-storage
+      volumes:
+        - name: data-storage
+          persistentVolumeClaim:
+            claimName: "pvc-1"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kta
+spec:
+  selector:
+    app: kta
+    cmp: app
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 10080
+      # Port to forward to inside the pod
+      targetPort: 8080
+      # Port accessible outside cluster
+      nodePort: 30001
+  type: NodePort
