@@ -9,6 +9,7 @@ spec:
     - ReadWriteMany
   hostPath:
     # directory location on host
-    path: /data/pv-1
+    path: /data/kta-log-v/
     # this field is optional
-    type: Directory
+    type: DirectoryOrCreate
+
