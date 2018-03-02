@@ -2,42 +2,39 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kta-app
+  name: kta-db
 spec:
-  replicas: 2
   template:
     metadata:
       labels:
         app: kta
-        cmp: app
+        cmp: db
     spec:
       containers:
-        - name: kta-app
-          image: mrupgrade/kta:5
+        - name: kta-db
+          image: postgres:9.6
           ports:
-            - containerPort: 8080
+            - containerPort: 5432
           env:
-            - name: KTA_DEBUG_VAR
-              value: Value from deployment definition
-            - name: KTA_LOG_PATH
-              value: /log/
+            - name: PGDATA
+              value: pgdata
           volumeMounts:
-            - mountPath: /log/
-              name: log
+            - mountPath: /var/lib/postgresql/data/
+              name: pgdata
       volumes:
-        - name: log
+        - name: pgdata
           persistentVolumeClaim:
-            claimName: "kta-log-vc"
+            claimName: "kta-db-vc"
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: kta-log-vc
+    name: kta-db-vc
 spec:
   storageClassName: ""
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -46,36 +43,38 @@ spec:
 apiVersion: "v1"
 kind: "PersistentVolume"
 metadata:
-  name: kta-log-v
+  name: kta-db-v
 spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     # directory location on host
-    path: /data/kta-log-v/
+    path: /data/kta-db/
     # this field is optional
     type: DirectoryOrCreate
+
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kta
+  name: kta-db
   labels:
     app: kta
-    cmp: app
+    cmp: db
 spec:
   selector:
     app: kta
-    cmp: app
+    cmp: db
   ports:
     - protocol: "TCP"
+      name: db-uri
       # Port accessible inside cluster
-      port: 10080
+      port: 10081
       # Port to forward to inside the pod
-      targetPort: 8080
+      targetPort: 5432
       # Port accessible outside cluster
-      nodePort: 30010
+      nodePort: 30011
   type: NodePort

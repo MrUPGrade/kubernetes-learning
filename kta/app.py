@@ -1,7 +1,7 @@
 import os
 
 from pathlib import Path
-from flask import Flask
+from flask import Flask, jsonify
 from datetime import date, datetime
 
 app = Flask(__name__)
@@ -17,6 +17,14 @@ def env():
     variable = os.getenv('KTA_DEBUG_VAR')
     message = 'KTA_DEBUG_VAR={}'.format(variable)
     return message
+
+
+@app.route('/environ')
+def environ():
+    result = {}
+    for k,v in os.environ.items():
+        result[k] = v
+    return jsonify(result)
 
 
 @app.route('/storage')

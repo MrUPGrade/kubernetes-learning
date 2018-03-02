@@ -1,6 +1,6 @@
 WORKSPACE:=$(shell pwd)
 
-TAG=4
+TAG=5
 KTA_IMAGE_NAME=mrupgrade/kta:$(TAG)
 
 D=docker
