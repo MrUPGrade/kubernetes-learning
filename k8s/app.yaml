@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
         - name: kta-app
-          image: mrupgrade/kta:5
+          image: mrupgrade/kta:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:

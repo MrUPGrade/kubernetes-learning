@@ -1,6 +1,6 @@
 WORKSPACE:=$(shell pwd)
 
-TAG=5
+TAG=latest
 KTA_IMAGE_NAME=mrupgrade/kta:$(TAG)
 
 D=docker
@@ -21,8 +21,6 @@ docker-kta-build:
 
 docker-kta-push:
 	$(D) push $(KTA_IMAGE_NAME)
-
-
 
 
 k8s-endpoints:

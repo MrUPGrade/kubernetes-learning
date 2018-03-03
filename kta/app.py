@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'Hello World!'
+    return 'Hello World 2 !'
 
 
 @app.route('/env')
@@ -22,7 +22,7 @@ def env():
 @app.route('/environ')
 def environ():
     result = {}
-    for k,v in os.environ.items():
+    for k, v in os.environ.items():
         result[k] = v
     return jsonify(result)
 
