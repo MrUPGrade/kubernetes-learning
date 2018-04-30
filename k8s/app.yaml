@@ -30,6 +30,7 @@ spec:
           persistentVolumeClaim:
             claimName: "kta-log-vc"
 
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -42,6 +43,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 
 ---
 apiVersion: "v1"
@@ -58,6 +60,7 @@ spec:
     path: /data/kta-log-v/
     # this field is optional
     type: DirectoryOrCreate
+
 
 ---
 apiVersion: v1

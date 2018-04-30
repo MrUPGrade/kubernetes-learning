@@ -29,3 +29,7 @@ k8s-endpoints:
 k8s-kta-pod-run:
 	kubectl run kta --image $(KTA_IMAGE_NAME) --port=8080
 	kubectl expose deployment kta --type=LoadBalancer
+
+k8s-apply:
+	kubectl apply -f k8s/db.yaml
+	kubectl apply -f k8s/app.yaml

@@ -26,6 +26,7 @@ spec:
           persistentVolumeClaim:
             claimName: "kta-db-vc"
 
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -38,6 +39,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 
 ---
 apiVersion: "v1"
@@ -75,6 +77,5 @@ spec:
       port: 10081
       # Port to forward to inside the pod
       targetPort: 5432
-      # Port accessible outside cluster
-      nodePort: 30011
+
   type: NodePort
