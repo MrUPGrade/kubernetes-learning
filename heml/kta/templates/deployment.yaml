@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kta
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: kta
+  template:
+    metadata:
+      labels:
+        app: kta
+    spec:
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KTA_DEBUG_VAR
+              value: Value from deployment definition
+            - name: KTA_LOG_PATH
+              value: /log/
+          volumeMounts:
+            - mountPath: /log/
+              name: log
+
+{{ if eq .Values.accessLog.enable true }}
+        - name: access-log
+          image: busybox
+          imagePullPolicy: Always
+          command: ["tail", "-f", "/log/access.log"]
+          volumeMounts:
+            - mountPath: /log/
+              name: log
+{{ end }}
+
+      volumes:
+        - name: log
+          emptyDir: {}

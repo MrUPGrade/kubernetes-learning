@@ -1,10 +1,14 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kta-app
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: kta
+      cmd: app
   template:
     metadata:
       labels:

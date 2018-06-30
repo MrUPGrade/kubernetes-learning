@@ -1,29 +1,55 @@
 WORKSPACE:=$(shell pwd)
 
+PIP=pip
+
 TAG=latest
-KTA_IMAGE_NAME=mrupgrade/kta:$(TAG)
+KTA_IMAGE_NAME_FLASK=mrupgrade/kta-flask:$(TAG)
+KTA_IMAGE_NAME_GUNICORN=mrupgrade/kta-gunicorn:$(TAG)
+
 
 D=docker
 RM=rm -Rfv
-DE=eval $(minikube docker-env);
+DOCKER_EVAL=eval $(minikube docker-env);
+
 
 
 clean:
 	$(RM) *.log
 
+pip-install:
+	${PIP} install --upgrade -r requirements.txt
+	${PIP} install --upgrade -r kta/requirements.txt
+
+
+env-dev-up:
+	minikube start --cpus 2 --disk-size 40000MB --memory 4096
+	helm init
+
+env-dev-down:
+	-minikube delete
+
+env-dev-setup: env-dev-down env-dev-up
+
+
 
 debug:
 	@echo workspace: $(WORKSPACE)
 
+docker-kta-build-flask:
+	$(D) build -t $(KTA_IMAGE_NAME_FLASK) -f ${WORKSPACE}/kta/flask.Dockerfile $(WORKSPACE)/kta/
 
-docker-kta-build:
-	$(D) build -t $(KTA_IMAGE_NAME) $(WORKSPACE)/kta/
+docker-kta-build-gunicorn:
+	$(D) build -t $(KTA_IMAGE_NAME_GUNICORN) -f ${WORKSPACE}/kta/gunicorn.Dockerfile $(WORKSPACE)/kta/
+
+docker-kta-build: docker-kta-build-flask docker-kta-build-gunicorn
 
 docker-kta-push:
-	$(D) push $(KTA_IMAGE_NAME)
+	$(D) push $(KTA_IMAGE_NAME_FLASK)
+	$(D) push $(KTA_IMAGE_NAME_GUNICORN)
 
 
-k8s-endpoints:
+
+mk-endpoints:
 	minikube service list
 
 k8s-kta-pod-run:

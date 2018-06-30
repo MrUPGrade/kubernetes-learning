@@ -1,12 +1,12 @@
 FROM python:3.6-stretch
 
-WORKDIR /
-
 ADD requirements.txt /
-RUN pip install -r /requirements.txt && \
+
+RUN pip install  --upgrade --no-cache-dir -r /requirements.txt && \
     rm requirements.txt
 
-ADD app.py /
+ADD webapp /webapp
+WORKDIR /webapp
 
 ENV FLASK_APP app.py
 EXPOSE 8080

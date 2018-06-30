@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kta
+  labels:
+    app: kta
+spec:
+  selector:
+    app: kta
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 10080
+      # Port to forward to inside the pod
+      targetPort: 8080
+      # Port accessible outside cluster
+      nodePort: 30010
+  type: NodePort
