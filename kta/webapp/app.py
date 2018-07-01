@@ -46,11 +46,12 @@ def storage():
 
 @app.route('/consul')
 def consul_view():
-    host = os.getenv('CONSUL_HOSTNAME')
+    host = os.getenv('KTA_CONSUL_HOST')
+    port = os.getenv('KTA_CONSUL_PORT', 8500)
     if not host:
-        return jsonify({'message': 'no CONSUL_HOSTNAME environment variable'})
+        return jsonify({'message': 'no KTA_CONSUL_HOST environment variable'})
 
-    c = consul.Consul(host=host)
+    c = consul.Consul(host=host, port=int(port))
     index, value = c.kv.get('kta/counter')
 
     if not value:

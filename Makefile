@@ -3,8 +3,8 @@ WORKSPACE:=$(shell pwd)
 PIP=pip
 
 TAG=latest
-KTA_IMAGE_NAME_FLASK=mrupgrade/kta-flask:$(TAG)
-KTA_IMAGE_NAME_GUNICORN=mrupgrade/kta-gunicorn:$(TAG)
+KTA_IMAGE_NAME_FLASK=mrupgrade/kta-webapp-flask:$(TAG)
+KTA_IMAGE_NAME_GUNICORN=mrupgrade/kta-webapp-gunicorn:$(TAG)
 
 
 D=docker
@@ -22,7 +22,7 @@ pip-install:
 
 
 env-dev-up:
-	minikube start --cpus 2 --disk-size 40000MB --memory 4096
+	minikube start --cpus 2 --disk-size 40000MB --memory 4096 #--kubernetes-version 1.10.4
 	helm init
 
 env-dev-down:

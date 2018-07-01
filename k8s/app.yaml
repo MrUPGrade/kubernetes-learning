@@ -2,22 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kta-app
+  name: kta-webapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: kta
-      cmd: app
+      app: kta-webapp
   template:
     metadata:
       labels:
-        app: kta
-        cmp: app
+        app: kta-webapp
     spec:
       containers:
-        - name: kta-app
-          image: mrupgrade/kta:latest
+        - name: app
+          image: mrupgrade/kta-webapp-flask:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -70,14 +68,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: kta
-  labels:
-    app: kta
-    cmp: app
+  name: kta-webapp
 spec:
   selector:
-    app: kta
-    cmp: app
+    app: kta-webapp
   ports:
     - protocol: "TCP"
       # Port accessible inside cluster
