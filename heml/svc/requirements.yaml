@@ -1,0 +1,8 @@
+dependencies:
+  - name: postgresql
+    repository: "@stable"
+    version: 0.14.4
+
+  - name: consul
+    repository: "@stable"
+    version: 3.2.0

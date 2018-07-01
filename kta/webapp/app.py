@@ -4,6 +4,8 @@ from pathlib import Path
 from flask import Flask, jsonify
 from datetime import date, datetime
 
+import consul
+
 app = Flask(__name__)
 
 
@@ -40,6 +42,27 @@ def storage():
         f.write(message)
 
     return message
+
+
+@app.route('/consul')
+def consul_view():
+    host = os.getenv('CONSUL_HOSTNAME')
+    if not host:
+        return jsonify({'message': 'no CONSUL_HOSTNAME environment variable'})
+
+    c = consul.Consul(host=host)
+    index, value = c.kv.get('kta/counter')
+
+    if not value:
+        counter = 0
+    else:
+        counter = int(value['Value'])
+
+    counter += 1
+
+    c.kv.put('kta/counter', str(counter))
+
+    return jsonify({'counter': counter})
 
 
 if __name__ == '__main__':

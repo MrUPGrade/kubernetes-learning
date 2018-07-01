@@ -24,6 +24,8 @@ spec:
               value: Value from deployment definition
             - name: KTA_LOG_PATH
               value: /log/
+            - name: CONSUL_HOSTNAME
+              value: "svc1-consul.default.svc.cluster.local"
           volumeMounts:
             - mountPath: /log/
               name: log

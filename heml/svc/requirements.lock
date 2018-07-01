@@ -1,0 +1,9 @@
+dependencies:
+- name: postgresql
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 0.14.4
+- name: consul
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 3.2.0
+digest: sha256:526627884dedda88d217400ac3dfe2abf622c96a73281d770f71ad7b7dd275d8
+generated: 2018-07-01T01:11:05.688357619+02:00
