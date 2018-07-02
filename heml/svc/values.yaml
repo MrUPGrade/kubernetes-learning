@@ -1,2 +1,6 @@
 postgresql:
   imageTag: 9.6.9
+
+rabbitmq:
+  ingress:
+    enabled: True

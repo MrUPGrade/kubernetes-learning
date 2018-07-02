@@ -6,3 +6,7 @@ dependencies:
   - name: consul
     repository: "@stable"
     version: 3.2.0
+
+  - name: rabbitmq
+    repository: "@stable"
+    version: 1.1.8

@@ -5,5 +5,8 @@ dependencies:
 - name: consul
   repository: https://kubernetes-charts.storage.googleapis.com
   version: 3.2.0
-digest: sha256:526627884dedda88d217400ac3dfe2abf622c96a73281d770f71ad7b7dd275d8
-generated: 2018-07-01T01:11:05.688357619+02:00
+- name: rabbitmq
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.1.8
+digest: sha256:1d4074ac84c106cc459c3ae1bf8366585772a4b1a700fcb39dba0597c1f03801
+generated: 2018-07-01T15:35:59.461942731+02:00
