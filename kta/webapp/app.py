@@ -1,11 +1,12 @@
 import os
+import consul
+import logging
 
 from pathlib import Path
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response, request
 from datetime import date, datetime
 
-import consul
-
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 
@@ -64,6 +65,15 @@ def consul_view():
     c.kv.put('kta/counter', str(counter))
 
     return jsonify({'counter': counter})
+
+
+@app.route('/authtest')
+def auth_test():
+    result = ""
+    for k, v in request.headers:
+        result += "%s => %s\n" % (k, v)
+    app.logger.info(result)
+    return make_response(result, 200)
 
 
 if __name__ == '__main__':

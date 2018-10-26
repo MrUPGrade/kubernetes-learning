@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: kta-webapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kta-webapp
@@ -75,7 +75,7 @@ spec:
   ports:
     - protocol: "TCP"
       # Port accessible inside cluster
-      port: 10080
+      port: 8080
       # Port to forward to inside the pod
       targetPort: 8080
       # Port accessible outside cluster

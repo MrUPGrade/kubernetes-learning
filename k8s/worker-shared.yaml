@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: worker
+  template:
+    metadata:
+      labels:
+        name: worker
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+        - tail
+        - -f
+        - /data/test
+        volumeMounts:
+        - mountPath: /data/
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: "worker-shared-pvc"

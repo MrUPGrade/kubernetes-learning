@@ -2,7 +2,9 @@
 apiVersion: "v1"
 kind: "PersistentVolume"
 metadata:
-  name: kta-log-v
+  name: worker-shared-v
+  labels:
+    name: shared
 spec:
   capacity:
     storage: 1Gi
@@ -10,7 +12,22 @@ spec:
     - ReadWriteMany
   hostPath:
     # directory location on host
-    path: /data/kta-log-v/
+    path: /data/kta-shared-v/
     # this field is optional
     type: DirectoryOrCreate
 
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: worker-shared-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+#  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      name: shared

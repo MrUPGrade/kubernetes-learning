@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: worker-init
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: wodker-init
+        image: busybox
+        command: ["touch", "/data/test"]
+        volumeMounts:
+        - mountPath: /data/
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: "worker-shared-pvc"
