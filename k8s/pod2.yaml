@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multicont
+spec:
+  containers:
+  - name: b1
+    image: busybox
+    command:
+    - sleep
+    - "100"
+  - name: b2
+    image: debian
+    command:
+    - sleep
+    - "200"
