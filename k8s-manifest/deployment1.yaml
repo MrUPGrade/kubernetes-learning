@@ -4,7 +4,7 @@ metadata:
   name: worker-shared
   namespace: default
 spec:
-
+  replicas: 4
   selector:
     matchLabels:
       name: worker-shared
@@ -13,9 +13,10 @@ spec:
       labels:
         name: worker-shared
     spec:
+      restartPolicy: Always
       containers:
-      - name: busybox
-        image: busybox
+      - name: worker-1
+        image: debian:8
         imagePullPolicy: IfNotPresent
         command:
         - sleep

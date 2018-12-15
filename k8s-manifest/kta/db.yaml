@@ -1,9 +1,13 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kta-db
 spec:
+  selector:
+    matchLabels:
+      app: kta
+      cmp: db
   template:
     metadata:
       labels:
@@ -11,31 +15,31 @@ spec:
         cmp: db
     spec:
       containers:
-        - name: kta-db
-          image: postgres:9.6
-          ports:
-            - containerPort: 5432
-          env:
-            - name: PGDATA
-              value: pgdata
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data/
-              name: pgdata
+      - name: kta-db
+        image: postgres:9.6
+        ports:
+        - containerPort: 5432
+        env:
+        - name: PGDATA
+          value: pgdata
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data/
+          name: pgdata
       volumes:
-        - name: pgdata
-          persistentVolumeClaim:
-            claimName: "kta-db-vc"
+      - name: pgdata
+        persistentVolumeClaim:
+          claimName: "kta-db-vc"
 
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: kta-db-vc
+  name: kta-db-vc
 spec:
   storageClassName: ""
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -50,7 +54,7 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   hostPath:
     # directory location on host
     path: /data/kta-db/
@@ -71,11 +75,11 @@ spec:
     app: kta
     cmp: db
   ports:
-    - protocol: "TCP"
-      name: db-uri
-      # Port accessible inside cluster
-      port: 10081
-      # Port to forward to inside the pod
-      targetPort: 5432
+  - protocol: "TCP"
+    name: db-uri
+    # Port accessible inside cluster
+    port: 10081
+    # Port to forward to inside the pod
+    targetPort: 5432
 
   type: NodePort

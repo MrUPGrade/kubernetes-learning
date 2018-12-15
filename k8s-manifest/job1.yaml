@@ -3,11 +3,11 @@ kind: Job
 metadata:
   name: job-example
 spec:
-  backoffLimit: 4
+  backoffLimit: 0
   template:
     spec:
       restartPolicy: Never
       containers:
       - name: job-example
         image: busybox
-        command: ["date"]
+        args: ["ls", "/test2"]

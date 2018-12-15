@@ -6,6 +6,7 @@ spec:
   backoffLimit: 4
   template:
     spec:
+
       restartPolicy: Never
       containers:
       - name: wodker-init
