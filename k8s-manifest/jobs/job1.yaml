@@ -10,4 +10,4 @@ spec:
       containers:
       - name: job-example
         image: busybox
-        args: ["ls", "/test2"]
+        args: ["ls", "-l"]

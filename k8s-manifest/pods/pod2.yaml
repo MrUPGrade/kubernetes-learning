@@ -13,4 +13,3 @@ spec:
     image: debian
     command:
     - sleep
-    - "2000"

@@ -6,7 +6,7 @@ metadata:
 spec:
   restartPolicy: Always
   containers:
-  - name: busybox/1
+  - name: busybox
     image: busybox
     imagePullPolicy: IfNotPresent
     command:
