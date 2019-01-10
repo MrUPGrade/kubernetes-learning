@@ -13,3 +13,4 @@ spec:
     image: debian
     command:
     - sleep
+    - "20"

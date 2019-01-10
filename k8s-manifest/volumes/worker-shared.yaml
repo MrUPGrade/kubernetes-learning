@@ -27,3 +27,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
+          claimName: worker-shared-pvc
