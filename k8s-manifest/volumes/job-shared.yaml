@@ -6,7 +6,6 @@ spec:
   backoffLimit: 4
   template:
     spec:
-
       restartPolicy: Never
       containers:
       - name: wodker-init
@@ -19,4 +18,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: "worker-shared-pvc"
+          claimName: worker-shared-pvc
