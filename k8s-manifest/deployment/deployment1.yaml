@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: worker-shared
+  labels:
+    type: dep
 spec:
   replicas: 4
 #  strategy:
