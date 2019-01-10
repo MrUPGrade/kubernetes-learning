@@ -3,19 +3,23 @@ kind: Deployment
 metadata:
   name: worker-shared
 spec:
-  replicas: 1
+  replicas: 10
+#  strategy:
+#    type: Recreate
   selector:
     matchLabels:
       name: worker-shared
   template:
     metadata:
+      annotations:
+        date: "adf"
       labels:
         name: worker-shared
     spec:
       restartPolicy: Always
       containers:
       - name: worker-1
-        image: debian:8
+        image: debian:9
         imagePullPolicy: IfNotPresent
         command:
         - sleep
