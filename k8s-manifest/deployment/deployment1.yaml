@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: worker-shared
 spec:
-  replicas: 10
+  replicas: 4
 #  strategy:
 #    type: Recreate
   selector:
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       annotations:
-        date: "adf"
+        date: "kurwa"
       labels:
         name: worker-shared
     spec:

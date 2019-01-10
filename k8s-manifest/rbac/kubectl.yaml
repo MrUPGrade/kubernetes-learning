@@ -3,12 +3,13 @@ kind: Pod
 metadata:
   name: kubectl
 spec:
-#  serviceAccountName: pod-reader-sa
+  #serviceAccountName: pod-reader-sa
   restartPolicy: Always
   containers:
   - name: kubectl
     image: dtzar/helm-kubectl:2.11.0
     imagePullPolicy: IfNotPresent
     command:
-    - sleep
-    - "3600"
+    - kubectl
+    - get
+    - pods
