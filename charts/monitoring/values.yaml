@@ -1,0 +1,104 @@
+prometheus:
+  fullnameOverride: prometheus
+
+  alertmanager:
+    enabled: false
+
+  pushgateway:
+    enabled: true
+    ingress:
+      enabled: true
+      hosts:
+      - pushgateway.minikube
+
+  kubeStateMetrics:
+    enabled: true
+    fullnameOverride: prometheus-kube-state-matrics
+
+  server:
+    fullnameOverride: prometheus-server
+    global:
+      scrape_interval: 15s
+
+    ingress:
+      enabled: true
+      hosts:
+      - prometheus.minikube
+
+    persistentVolume:
+      enabled: true
+      size: 2Gi
+      storageClass: standard
+
+  nodeExporter:
+    enabled: true
+    fullnameOverride: prometheus-node-exporter
+
+
+influxdb:
+  persistence:
+    enabled: true
+    storageClassName: standard
+
+  setDefaultUser:
+    enabled: true
+    user:
+      username: admin
+      password: admin
+
+  ingress:
+    enabled: true
+    hostname: influxdb.minikube
+
+
+grafana:
+  fullnameOverride: grafana
+  ingress:
+    enabled: true
+    hosts:
+    - grafana.minikube
+
+  env:
+    GF_SECURITY_ADMIN_USER: admin
+    GF_SECURITY_ADMIN_PASSWORD: admin
+
+  persistence:
+    enabled: true
+    storageClassName: standard
+    size: 2Gi
+    accessModes:
+    - ReadWriteMany
+
+  sidecar:
+    dashboards:
+      enabled: false
+
+    datasources:
+      enabled: false
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      deleteDatasources:
+      - name: Prometheus
+        orgId: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        orgId: 1
+        # This should be parametrize
+        url: http://prometheus-server
+        database:
+        basicAuth: true
+        basicAuthUser: admin
+        basicAuthPassword: foobar
+        isDefault: true
+        jsonData:
+          graphiteVersion: "1.1"
+          tlsAuth: false
+          tlsAuthWithCACert: false
+        version: 1
+        editable: false
+
+

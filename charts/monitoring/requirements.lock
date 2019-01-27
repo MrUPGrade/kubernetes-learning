@@ -1,0 +1,12 @@
+dependencies:
+- name: influxdb
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.1.1
+- name: prometheus
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 8.4.3
+- name: grafana
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.22.1
+digest: sha256:de31cfe4b24e33e9e0a41088fd89f01fc44975e42aa8c188ad938dd9b13333b1
+generated: 2019-01-27T17:39:57.566305507+01:00

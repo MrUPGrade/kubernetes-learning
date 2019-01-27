@@ -35,6 +35,21 @@ Docker:
 eval $(minikube docker-env)
 ```
 
+Domain names that may be useful for testing:
+
+```bash
+cat <<EOF | sudo tee -a /etc/hosts
+$(minikube ip) minikube
+$(minikube ip) kta.minikube
+$(minikube ip) echoapi.minikube
+$(minikube ip) grafana.minikube
+$(minikube ip) prometheus.minikube
+$(minikube ip) influxdb.minikube
+$(minikube ip) pushgateway.minikube
+EOF
+```
+
+
 helm
 
 ```

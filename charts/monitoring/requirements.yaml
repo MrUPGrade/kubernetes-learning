@@ -1,0 +1,14 @@
+---
+dependencies:
+- name: influxdb
+  repository: "@stable"
+  version: 1.1.1
+
+- name: prometheus
+  repository: "@stable"
+  version: 8.4.3
+
+- name: grafana
+  repository: "@stable"
+  version: 1.22.1
+
