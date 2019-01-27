@@ -3,9 +3,11 @@ prometheus:
 
   alertmanager:
     enabled: false
+    fullnameOverride: prometheus-alertmanager
 
   pushgateway:
     enabled: true
+    fullnameOverride: prometheus-pushgateway
     ingress:
       enabled: true
       hosts:
@@ -36,6 +38,7 @@ prometheus:
 
 
 influxdb:
+  fullnameOverride: influxdb
   persistence:
     enabled: true
     storageClassName: standard
