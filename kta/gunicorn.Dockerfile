@@ -1,7 +1,8 @@
-FROM python:3.6-stretch
+FROM python:3.7-stretch
 
 ADD requirements.txt /
 RUN pip install --upgrade --no-cache-dir -r /requirements.txt && \
+    pip install gevent gunicorn && \
     rm requirements.txt
 
 ADD webapp /webapp

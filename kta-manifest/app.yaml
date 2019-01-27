@@ -6,11 +6,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: kta-webapp
+      app: kta
+      cmp: webapp
   template:
     metadata:
       labels:
-        app: kta-webapp
+        app: kta
+        cmp: webapp
     spec:
       containers:
       - name: app
@@ -29,14 +31,14 @@ spec:
       volumes:
       - name: log
         persistentVolumeClaim:
-          claimName: "kta-log-vc"
+          claimName: kta-log-pvc
 
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: kta-log-vc
+  name: kta-log-pvc
 spec:
   storageClassName: ""
   accessModes:
@@ -47,19 +49,17 @@ spec:
 
 
 ---
-apiVersion: "v1"
-kind: "PersistentVolume"
+apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: kta-log-v
+  name: kta-log-pv
 spec:
   capacity:
     storage: 1Gi
   accessModes:
   - ReadWriteMany
   hostPath:
-    # directory location on host
-    path: /data/kta-log-v/
-    # this field is optional
+    path: /data/kta-log-pv/
     type: DirectoryOrCreate
 
 
@@ -70,12 +70,10 @@ metadata:
   name: kta-webapp
 spec:
   selector:
-    app: kta-webapp
+    app: kta
+    cmp: webapp
   type: ClusterIP
   ports:
-  - protocol: "TCP"
-    # Port accessible inside cluster
+  - protocol: TCP
     port: 8080
-    # Port to forward to inside the pod
     targetPort: 8080
-    # Port accessible outside cluster

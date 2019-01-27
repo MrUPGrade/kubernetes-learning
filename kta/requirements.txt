@@ -1,4 +1,2 @@
 flask
-gunicorn
-gevent
 python-consul

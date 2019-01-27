@@ -4,7 +4,8 @@ metadata:
   name: kta
 spec:
   rules:
-  - http:
+  - host: kta.minikube
+    http:
       paths:
       - path: /
         backend:
