@@ -17,9 +17,11 @@ spec:
         image: busybox
         imagePullPolicy: IfNotPresent
         command:
-        - tail
-        - -f
-        - /data/test
+#        - tail
+#        - -f
+#        - /data/test
+        - sleep
+        - "10000"
         volumeMounts:
         - mountPath: /data/
           name: data
@@ -27,4 +29,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: worker-shared-pvc
+          claimName: my-deployment

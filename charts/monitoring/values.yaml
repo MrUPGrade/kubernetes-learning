@@ -32,6 +32,7 @@ prometheus:
       size: 2Gi
       storageClass: standard
 
+
   nodeExporter:
     enabled: true
     fullnameOverride: prometheus-node-exporter

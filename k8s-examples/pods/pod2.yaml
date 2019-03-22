@@ -8,9 +8,9 @@ spec:
     image: busybox
     command:
     - sleep
-    - "200"
+    - "200000"
   - name: b2
     image: debian
     command:
     - sleep
-    - "200"
+    - "2000000"

@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: kubectl
 spec:
-  #serviceAccountName: pod-reader-sa
+  serviceAccountName: pod-reader-sa
   restartPolicy: Always
   containers:
   - name: kubectl
