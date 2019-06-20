@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: date-job
+  name: date
 spec:
   schedule: "*/1 * * * *"
   jobTemplate:
@@ -12,7 +12,7 @@ spec:
           containers:
           - name: date-job
             image: busybox
-            args:
+            command:
             - /bin/sh
             - -c
             - |
@@ -25,4 +25,4 @@ spec:
           volumes:
           - name: data
             persistentVolumeClaim:
-              claimName: "worker-shared-pvc"
+              claimName: shared-pvc

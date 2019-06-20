@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: worker-init
+  name: init
 spec:
   backoffLimit: 4
   template:
@@ -18,4 +18,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: worker-shared-pvc
+          claimName: shared-pvc

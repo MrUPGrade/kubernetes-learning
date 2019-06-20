@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kubectl
+  name: pod-lister
 spec:
   serviceAccountName: pod-reader-sa
-  restartPolicy: Always
+  restartPolicy:
   containers:
   - name: kubectl
     image: dtzar/helm-kubectl:2.11.0
     imagePullPolicy: IfNotPresent
-    command:
+    command: |
     - kubectl
     - get
     - pods

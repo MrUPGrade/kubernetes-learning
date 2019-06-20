@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: worker
-  namespace: default
 spec:
   selector:
     matchLabels:
@@ -12,14 +11,15 @@ spec:
       labels:
         name: worker
     spec:
+      nodeSelector:
+        paperspace.com/pool-name: service-small
       containers:
-      - name: busybox
-        image: busybox
+      - name: container
+        image: debian
         imagePullPolicy: IfNotPresent
         command:
-        - tail
-        - -f
-        - /data/test
+        - sleep
+        - "100000"
         volumeMounts:
         - mountPath: /data/
           name: data
@@ -27,4 +27,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: gp2-pvc

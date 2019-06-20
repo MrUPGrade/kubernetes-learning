@@ -2,13 +2,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: shared-pvc
+  name: gp2-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: simple-gp2
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      name: shared

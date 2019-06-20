@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: worker
+  name: busybox-pod
   namespace: default
 spec:
   restartPolicy: Always

@@ -2,19 +2,16 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: worker-shared-v
+  name: shared-pv
   labels:
     name: shared
 spec:
   capacity:
     storage: 1Gi
-  storageClassName: ""
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   hostPath:
-    # directory location on host
     path: /data/kta-shared-v/
-    # this field is optional
     type: DirectoryOrCreate
 
 
